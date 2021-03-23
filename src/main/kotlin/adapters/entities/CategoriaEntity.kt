@@ -1,6 +1,6 @@
 package adapters.entities
 import domains.Categoria
-import javax.persistence.*;
+import javax.persistence.*
 
 @Entity
 data class CategoriaEntity(
@@ -12,7 +12,7 @@ data class CategoriaEntity(
     val nome: String = "",
 
     @OneToMany(mappedBy = "categoria", cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
-    var subcategorias: List<SubCategoriaEntity> = emptyList()
+    val subcategorias: List<SubCategoriaEntity> = emptyList()
 )
 
 // Mappers

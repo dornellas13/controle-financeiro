@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 
 @SpringBootApplication()
 @ComponentScan("frameworks.IoC")
-class Startup
+class Main
 
 fun main (args: Array<String>) {
-    runApplication<Startup>(*args)
+    runApplication<Main>(*args)
 }
