@@ -10,12 +10,8 @@ import java.util.*
 interface CategoriaJpaRepository: JpaRepository<CategoriaEntity, Int>
 
 open class CategoriaRepository(private val categoriaRepository: CategoriaJpaRepository) : ICategoriaRepository {
-    override fun save(product: CategoriaEntity): CategoriaEntity {
-        return this.categoriaRepository.save(product)
-    }
-
-    override fun findById(id: Int): Optional<CategoriaEntity> {
-        return this.categoriaRepository.findById(id)
+    override fun save(categoria: CategoriaEntity): CategoriaEntity {
+        return this.categoriaRepository.save(categoria)
     }
 
     override fun getById(id: Int): CategoriaEntity {

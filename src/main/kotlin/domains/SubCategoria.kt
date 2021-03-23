@@ -1,6 +1,7 @@
 package domains
 
-data class SubCategoria (
+data class SubCategoria(
     val id: Int,
     val nome: String,
-    val categoria: Categoria)
+    var categoria: Categoria
+    )

@@ -39,7 +39,7 @@ class CategoriaController(private val obterCategoriaUseCase: ObterCategoriaUseCa
     @DeleteMapping("/{id}")
     fun excluir(@PathVariable("id") id: Int): ResponseEntity.BodyBuilder {
         excluirCategoriaUseCase.run(id)
-        return ResponseEntity.ok()
+        return ResponseEntity.accepted()
     }
 
     @PutMapping("/{id}")

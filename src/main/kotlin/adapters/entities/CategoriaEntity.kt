@@ -2,7 +2,7 @@ package adapters.entities
 import domains.Categoria
 import javax.persistence.*
 
-@Entity
+@Entity @Table(name = "categoria")
 data class CategoriaEntity(
     @Id
     @GeneratedValue
@@ -15,7 +15,6 @@ data class CategoriaEntity(
     val subcategorias: List<SubCategoriaEntity> = emptyList()
 )
 
-// Mappers
 fun CategoriaEntity.toCategoria() =
     Categoria(
         id = this.id,

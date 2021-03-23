@@ -12,7 +12,6 @@ import usecases.repositories.ICategoriaRepository
 @Component
 class CriarCategoriaUseCase(private val categoriaRepository: ICategoriaRepository) {
     fun run (categoria: Categoria): Categoria {
-        categoriaRepository.save(categoria.toCategoriaEntity())
-        return categoria
+        return categoriaRepository.save(categoria.toCategoriaEntity()).toCategoria()
     }
 }
