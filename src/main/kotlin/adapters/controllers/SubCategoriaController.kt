@@ -1,19 +1,20 @@
 package adapters.controllers
-import adapters.dto.SubCategoriaDto
-import adapters.dto.toCategoriaDto
-import adapters.dto.toSubCategoria
-import adapters.dto.toSubCategoriaDto
+import adapters.dto.*
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import usecases.categorias.ObterCategoriaUseCase
-import usecases.subcategorias.*
+import usecases.lancamentos.CriarLancamentoUseCase
+import usecases.subcategorias.AtualizarSubCategoriaUseCase
+import usecases.subcategorias.ExcluirSubCategoriaUseCase
+import usecases.subcategorias.ListarSubCategoriaUseCase
+import usecases.subcategorias.ObterSubCategoriaUseCase
 
 @RestController
 @RequestMapping("/api/subcategorias")
 class SubCategoriaController(private val obterSubCategoriaUseCase: ObterSubCategoriaUseCase,
                              private val atualizarSubCategoriaUseCase: AtualizarSubCategoriaUseCase,
                              private val listarSubCategoriaUseCase: ListarSubCategoriaUseCase,
-                             private val excluirSubCategoriaUseCase: ExcluirSubCategoriaUseCase
+                             private val excluirSubCategoriaUseCase: ExcluirSubCategoriaUseCase,
+                             private val criarLancamentoUseCase: CriarLancamentoUseCase
                              ) {
 
     @GetMapping("/{id}")
@@ -38,6 +39,14 @@ class SubCategoriaController(private val obterSubCategoriaUseCase: ObterSubCateg
     fun atualizar(@PathVariable("id") id: Int, @RequestBody subCategoria: SubCategoriaDto): ResponseEntity<SubCategoriaDto> {
         val subCategoriaUpdated = atualizarSubCategoriaUseCase.run(id, subCategoria = subCategoria.toSubCategoria()).toSubCategoriaDto()
         return ResponseEntity.ok(subCategoriaUpdated)
+    }
+
+
+    @PostMapping("/{id}/lancamentos")
+    fun criarLancamento(@PathVariable("id") id: Int, @RequestBody lancamento: LancamentoDto): ResponseEntity<LancamentoDto> {
+        val subCategoria = obterSubCategoriaUseCase.run(id)
+        val lancamentoCreated = criarLancamentoUseCase.run(lancamento = lancamento.toLancamento(subCategoria.toSubCategoriaDto()))
+        return ResponseEntity.ok(lancamentoCreated.toLancamentoDto())
     }
 
 }

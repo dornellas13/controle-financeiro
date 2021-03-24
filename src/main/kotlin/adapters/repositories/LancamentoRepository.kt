@@ -20,7 +20,7 @@ open class LancamentoRepository(private val lancamentoRepository: ILancamentoJpa
     override fun findAll(): List<LancamentoEntity> {
         return this.lancamentoRepository.findAll()
     }
-
+    
     override fun deleteById(id: Int) {
         return this.lancamentoRepository.deleteById(id)
     }

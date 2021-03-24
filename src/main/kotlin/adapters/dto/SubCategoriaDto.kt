@@ -13,7 +13,7 @@ fun SubCategoria.toSubCategoriaDto() =
     SubCategoriaDto(
         id = this.id,
         nome = this.nome,
-        categoria = this.categoria.toCategoriaDto()
+        categoria = this.categoria!!.toCategoriaDto()
     )
 
 fun SubCategoriaDto.toSubCategoria(categoria: Categoria) =

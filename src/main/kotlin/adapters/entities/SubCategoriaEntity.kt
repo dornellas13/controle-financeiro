@@ -1,9 +1,5 @@
 package adapters.entities
-import adapters.entities.CategoriaEntity
-import domains.Categoria
 import domains.SubCategoria
-import org.hibernate.annotations.OnDelete
-import org.hibernate.annotations.OnDeleteAction
 import javax.persistence.*
 
 @Entity @Table(name = "subcategorias")
@@ -16,7 +12,10 @@ data class SubCategoriaEntity(
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoria_id")
-    val categoria: CategoriaEntity? = null
+    val categoria: CategoriaEntity? = null,
+
+    @OneToMany(mappedBy = "subcategoria", cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
+    val lancamentos: List<LancamentoEntity> = emptyList()
     )
 
 fun SubCategoriaEntity.toSubCategoria() =
@@ -30,5 +29,5 @@ fun SubCategoria.toSubCategoriaEntity() =
     SubCategoriaEntity(
         id = this.id,
         nome = this.nome,
-        categoria = this.categoria.toCategoriaEntity()
+        categoria = this.categoria!!.toCategoriaEntity()
     )

@@ -1,7 +1,6 @@
 package usecases.repositories
 
 import adapters.entities.CategoriaEntity
-import java.util.*
 
 interface ICategoriaRepository {
     fun save(categoria: CategoriaEntity): CategoriaEntity
