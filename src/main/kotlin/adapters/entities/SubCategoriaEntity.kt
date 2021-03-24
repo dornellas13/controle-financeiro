@@ -6,9 +6,9 @@ import javax.persistence.*
 data class SubCategoriaEntity(
     @Id
     @GeneratedValue
-    val id: Int = 0,
+    val id: Int? = 0,
 
-    val nome: String = "",
+    val nome: String? = "",
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoria_id")
@@ -20,8 +20,8 @@ data class SubCategoriaEntity(
 
 fun SubCategoriaEntity.toSubCategoria() =
     SubCategoria(
-        id = this.id,
-        nome = this.nome,
+        id = this.id!!,
+        nome = this.nome!!,
         categoria = this.categoria!!.toCategoria()
     )
 

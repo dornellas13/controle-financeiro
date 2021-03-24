@@ -6,10 +6,10 @@ import javax.persistence.*
 data class CategoriaEntity(
     @Id
     @GeneratedValue
-    val id: Int = 0,
+    val id: Int? = 0,
 
     @Column(nullable = false)
-    val nome: String = "",
+    val nome: String? = "",
 
     @OneToMany(mappedBy = "categoria", cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
     val subcategorias: List<SubCategoriaEntity> = emptyList()
@@ -17,8 +17,8 @@ data class CategoriaEntity(
 
 fun CategoriaEntity.toCategoria() =
     Categoria(
-        id = this.id,
-        nome = this.nome,
+        id = this.id!!,
+        nome = this.nome!!,
         subcategorias = this.subcategorias
     )
 

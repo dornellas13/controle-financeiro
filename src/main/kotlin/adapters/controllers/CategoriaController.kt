@@ -52,5 +52,4 @@ class CategoriaController(private val obterCategoriaUseCase: ObterCategoriaUseCa
         return ResponseEntity.ok(subCategoriaCreated.toSubCategoriaDto())
     }
 
-
 }

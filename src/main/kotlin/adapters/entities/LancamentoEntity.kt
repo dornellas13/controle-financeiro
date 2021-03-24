@@ -9,16 +9,16 @@ import javax.persistence.*
 data class LancamentoEntity(
     @Id
     @GeneratedValue
-    val id: Int = 0,
+    val id: Int? = 0,
 
     @Column(nullable = false)
-    val valor: Float,
+    val valor: Double?,
 
     @Column(nullable = false)
-    val data: Date,
+    val data: Date?,
 
     @Column(nullable = false)
-    val comentario: String,
+    val comentario: String?,
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subcategoria_id")
@@ -27,10 +27,10 @@ data class LancamentoEntity(
 
 fun LancamentoEntity.toLancamento() =
     Lancamento(
-        id = this.id,
-        valor = this.valor,
-        data = this.data,
-        comentario = this.comentario
+        id = this.id!!,
+        valor = this.valor!!,
+        data = this.data!!,
+        comentario = this.comentario!!
     )
 
 fun Lancamento.toLancamentoEntity() =

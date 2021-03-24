@@ -4,7 +4,7 @@ import domains.Categoria
 
 data class CategoriaDto(
     var id: Int = 0,
-    val nome: String
+    val nome: String = ""
 )
 
 fun Categoria.toCategoriaDto() =

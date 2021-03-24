@@ -7,7 +7,7 @@ import java.util.*
 
 data class LancamentoDto(
     var id: Int = 0,
-    val valor: Float,
+    val valor: Double,
     val data: Date,
     val comentario: String
 )
