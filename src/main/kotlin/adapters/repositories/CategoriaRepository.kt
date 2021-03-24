@@ -4,12 +4,11 @@ import adapters.entities.CategoriaEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import usecases.repositories.ICategoriaRepository
-import java.util.*
 
 @Repository
-interface CategoriaJpaRepository: JpaRepository<CategoriaEntity, Int>
+interface ICategoriaJpaRepository: JpaRepository<CategoriaEntity, Int>
 
-open class CategoriaRepository(private val categoriaRepository: CategoriaJpaRepository) : ICategoriaRepository {
+open class CategoriaRepository(private val categoriaRepository: ICategoriaJpaRepository) : ICategoriaRepository {
     override fun save(categoria: CategoriaEntity): CategoriaEntity {
         return this.categoriaRepository.save(categoria)
     }

@@ -2,7 +2,7 @@ package adapters.entities
 import domains.Categoria
 import javax.persistence.*
 
-@Entity @Table(name = "categoria")
+@Entity @Table(name = "categorias")
 data class CategoriaEntity(
     @Id
     @GeneratedValue

@@ -1,13 +1,9 @@
 package adapters.controllers
 import adapters.dto.*
-import adapters.entities.CategoriaEntity
-import adapters.entities.toCategoria
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import usecases.categorias.*
-import usecases.repositories.ICategoriaRepository
 import usecases.subcategorias.CriarSubCategoriaUseCase
-import java.util.*
 
 @RestController
 @RequestMapping("/api/categorias")
