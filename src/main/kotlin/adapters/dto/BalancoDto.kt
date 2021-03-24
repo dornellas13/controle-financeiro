@@ -13,7 +13,7 @@ data class BalancoDto(
 fun Balanco.toBalancoDto() =
     BalancoDto(
         categoria = this.categoria!!.toCategoriaDto(),
-        saldo = this.saldo!!,
+        saldo = this.saldo,
         receita = this.receita,
-        despesa = this.despesa!!
+        despesa = this.despesa
     )

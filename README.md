@@ -28,7 +28,7 @@ Packages Explanation
 
 From ⭐️ [Clean Code Blog](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 
-## Technologies
+## Technologies👨‍💻
 - Kotlin
 - Spring Boot
 - Docker
@@ -36,8 +36,23 @@ From ⭐️ [Clean Code Blog](https://blog.cleancoder.com/uncle-bob/2012/08/13/t
 - JPA Data
 - Swagger
 - H2 Database
+- Actuator (HealthCheck)
+
+## Requirements⚠️
+- JDK >= 8
+- Kotlin
+- Gradle >= 5.0
+- Docker >= 19
 
 ## Build 🚀
-- 
+
+```bash
+1. gradle build
+2. docker build -t controle-financeiro .
+3. docker run -dp 8080:8080 controle-financeiro
+4. open cmd curl http://localhost:8080/actuator/health
+
+```
+
 
 
