@@ -2,6 +2,8 @@ package adapters.entities
 import adapters.entities.CategoriaEntity
 import domains.Categoria
 import domains.SubCategoria
+import org.hibernate.annotations.OnDelete
+import org.hibernate.annotations.OnDeleteAction
 import javax.persistence.*
 
 @Entity @Table(name = "subcategoria")

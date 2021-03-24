@@ -1,7 +1,7 @@
 package domains
 
 data class SubCategoria(
-    val id: Int,
-    val nome: String,
+    val id: Int = 0,
+    val nome: String = "",
     var categoria: Categoria
     )

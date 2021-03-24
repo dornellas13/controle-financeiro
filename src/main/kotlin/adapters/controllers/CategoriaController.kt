@@ -1,13 +1,12 @@
 package adapters.controllers
-import adapters.dto.CategoriaDto
-import adapters.dto.toCategoria
-import adapters.dto.toCategoriaDto
+import adapters.dto.*
 import adapters.entities.CategoriaEntity
 import adapters.entities.toCategoria
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import usecases.categorias.*
 import usecases.repositories.ICategoriaRepository
+import usecases.subcategorias.CriarSubCategoriaUseCase
 import java.util.*
 
 @RestController
@@ -16,7 +15,9 @@ class CategoriaController(private val obterCategoriaUseCase: ObterCategoriaUseCa
                           private val criarCategoriaUseCase: CriarCategoriaUseCase,
                           private val atualizarCategoriaUseCase: AtualizarCategoriaUseCase,
                           private val listarCategoriaUseCase: ListarCategoriaUseCase,
-                          private val excluirCategoriaUseCase: ExcluirCategoriaUseCase) {
+                          private val excluirCategoriaUseCase: ExcluirCategoriaUseCase,
+                          private val criarSubCategoriaUseCase: CriarSubCategoriaUseCase
+                          ) {
 
     @GetMapping("/{id}")
     fun obter(@PathVariable("id") id: Int): ResponseEntity<CategoriaDto> {
@@ -24,10 +25,10 @@ class CategoriaController(private val obterCategoriaUseCase: ObterCategoriaUseCa
     }
 
     @GetMapping()
-    fun listar(): List<ResponseEntity<CategoriaDto>> {
-        return listarCategoriaUseCase.run().map {
-            ResponseEntity.ok(it.toCategoriaDto())
-        }
+    fun listar(): ResponseEntity<List<CategoriaDto>> {
+        return ResponseEntity.ok(listarCategoriaUseCase.run().map {
+            it.toCategoriaDto()
+        })
     }
 
     @PostMapping()
@@ -47,5 +48,13 @@ class CategoriaController(private val obterCategoriaUseCase: ObterCategoriaUseCa
        val categoriaUpdated = atualizarCategoriaUseCase.run(id, categoria = categoria.toCategoria()).toCategoriaDto()
         return ResponseEntity.ok(categoriaUpdated)
     }
+
+    @PostMapping("/{id}/subcategorias")
+    fun criarSubCategoria(@PathVariable("id") id: Int, @RequestBody subCategoria: SubCategoriaDto): ResponseEntity<SubCategoriaDto> {
+        val categoria = obterCategoriaUseCase.run(id)
+        val subCategoriaCreated = criarSubCategoriaUseCase.run(subCategoria.toSubCategoria(categoria = categoria))
+        return ResponseEntity.ok(subCategoriaCreated.toSubCategoriaDto())
+    }
+
 
 }

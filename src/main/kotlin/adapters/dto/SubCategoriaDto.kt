@@ -5,13 +5,15 @@ import domains.SubCategoria
 
 data class SubCategoriaDto(
     var id: Int = 0,
-    val nome: String
+    val nome: String,
+    var categoria: CategoriaDto? = null
 )
 
 fun SubCategoria.toSubCategoriaDto() =
     SubCategoriaDto(
         id = this.id,
-        nome = this.nome
+        nome = this.nome,
+        categoria = this.categoria.toCategoriaDto()
     )
 
 fun SubCategoriaDto.toSubCategoria(categoria: Categoria) =
@@ -19,4 +21,11 @@ fun SubCategoriaDto.toSubCategoria(categoria: Categoria) =
         id = this.id,
         nome = this.nome,
         categoria = categoria
+    )
+
+fun SubCategoriaDto.toSubCategoria() =
+    SubCategoria(
+        id = this.id,
+        nome = this.nome,
+        categoria = Categoria()
     )
