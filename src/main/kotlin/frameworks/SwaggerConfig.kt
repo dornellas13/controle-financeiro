@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 
 @Component
 @EnableSwagger2
-class SwaggerConfig  {
+class SwaggerConfig : WebMvcConfigurationSupport() {
     @Bean
     fun greetingApi(): Docket {
         return Docket(DocumentationType.SWAGGER_2)
