@@ -44,15 +44,15 @@ From ⭐️ [Clean Code Blog](https://blog.cleancoder.com/uncle-bob/2012/08/13/t
 - Gradle >= 5.0
 - Docker >= 19
 
-## Build 🚀
+## Build and Run 🚀
 
 ```bash
 1. gradle build
 2. docker build -t controle-financeiro .
 3. docker run -dp 8080:8080 controle-financeiro
-4. open cmd curl http://localhost:8080/actuator/health
-
+4. open cmd and copy -> curl http://localhost:8080/actuator/health
+5. open swagger http://localhost:8080/swagger-ui.html
 ```
 
-
+## Test
 
