@@ -35,7 +35,7 @@ class LancamentoController(private val obterLancamentoUseCase: ObterLancamentoUs
     @DeleteMapping("/{id}")
     fun excluir(@PathVariable("id") id: Int): ResponseEntity<Any> {
         excluirLancamentoUseCase.run(id)
-        return ResponseEntity(ACCEPTED)
+        return ResponseEntity(OK)
     }
 
     @PutMapping("/{id}")
