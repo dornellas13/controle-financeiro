@@ -2,7 +2,7 @@
 proof of concept about kotlin and spring boot
 
 ## Clean Architecture Concept
-[![Clean Architecture](./assets/clean_architecture.png)](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+[![Clean Architecture](assets/img/clean_architecture.png)](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 
 Packages Explanation
 - /src/main/kotlin/domains:
