@@ -3,6 +3,8 @@ package adapters.controllers
 import adapters.dto.LancamentoDto
 import adapters.dto.toLancamento
 import adapters.dto.toLancamentoDto
+import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatus.*
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import usecases.lancamentos.AtualizarLancamentoUseCase
@@ -31,9 +33,9 @@ class LancamentoController(private val obterLancamentoUseCase: ObterLancamentoUs
     }
 
     @DeleteMapping("/{id}")
-    fun excluir(@PathVariable("id") id: Int): ResponseEntity.BodyBuilder {
+    fun excluir(@PathVariable("id") id: Int): ResponseEntity<Any> {
         excluirLancamentoUseCase.run(id)
-        return ResponseEntity.ok()
+        return ResponseEntity(ACCEPTED)
     }
 
     @PutMapping("/{id}")

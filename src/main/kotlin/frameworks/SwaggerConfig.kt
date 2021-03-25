@@ -1,6 +1,7 @@
 package frameworks.swagger
 
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport
@@ -12,7 +13,7 @@ import springfox.documentation.spring.web.plugins.Docket
 import springfox.documentation.swagger2.annotations.EnableSwagger2
 
 
-@Component
+@Configuration
 @EnableSwagger2
 class SwaggerConfig : WebMvcConfigurationSupport() {
     @Bean
@@ -26,8 +27,8 @@ class SwaggerConfig : WebMvcConfigurationSupport() {
 
     private fun metaData(): ApiInfo {
         return ApiInfoBuilder()
-            .title("Spring Boot REST API")
-            .description("\"Spring Boot REST API for greeting people\"")
+            .title("Controle Financeiro")
+            .description("\"Api de controle financeiro\"")
             .version("1.0.0")
             .license("Apache License Version 2.0")
             .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0\"")

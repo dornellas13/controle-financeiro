@@ -1,5 +1,7 @@
 package adapters.controllers
 import adapters.dto.*
+import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatus.*
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import usecases.lancamentos.CriarLancamentoUseCase
@@ -30,9 +32,9 @@ class SubCategoriaController(private val obterSubCategoriaUseCase: ObterSubCateg
     }
 
     @DeleteMapping("/{id}")
-    fun excluir(@PathVariable("id") id: Int): ResponseEntity.BodyBuilder {
+    fun excluir(@PathVariable("id") id: Int): ResponseEntity<Any> {
         excluirSubCategoriaUseCase.run(id)
-        return ResponseEntity.ok()
+        return ResponseEntity(ACCEPTED)
     }
 
     @PutMapping("/{id}")
@@ -46,7 +48,7 @@ class SubCategoriaController(private val obterSubCategoriaUseCase: ObterSubCateg
     fun criarLancamento(@PathVariable("id") id: Int, @RequestBody lancamento: LancamentoDto): ResponseEntity<LancamentoDto> {
         val subCategoria = obterSubCategoriaUseCase.run(id)
         val lancamentoCreated = criarLancamentoUseCase.run(lancamento = lancamento.toLancamento(subCategoria.toSubCategoriaDto()))
-        return ResponseEntity.ok(lancamentoCreated.toLancamentoDto())
+        return ResponseEntity(lancamentoCreated.toLancamentoDto(), CREATED)
     }
 
 }

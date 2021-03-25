@@ -1,5 +1,7 @@
 package adapters.controllers
 import adapters.dto.*
+import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatus.*
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import usecases.categorias.*
@@ -30,13 +32,13 @@ class CategoriaController(private val obterCategoriaUseCase: ObterCategoriaUseCa
     @PostMapping()
     fun criar(@RequestBody categoria: CategoriaDto): ResponseEntity<CategoriaDto> {
         val categoriaCreated = criarCategoriaUseCase.run(categoria.toCategoria())
-        return ResponseEntity.ok(categoriaCreated.toCategoriaDto())
+        return ResponseEntity(categoriaCreated.toCategoriaDto(), CREATED)
     }
 
     @DeleteMapping("/{id}")
-    fun excluir(@PathVariable("id") id: Int): ResponseEntity.BodyBuilder {
+    fun excluir(@PathVariable("id") id: Int): ResponseEntity<Any> {
         excluirCategoriaUseCase.run(id)
-        return ResponseEntity.accepted()
+        return ResponseEntity(ACCEPTED)
     }
 
     @PutMapping("/{id}")
@@ -49,7 +51,7 @@ class CategoriaController(private val obterCategoriaUseCase: ObterCategoriaUseCa
     fun criarSubCategoria(@PathVariable("id") id: Int, @RequestBody subCategoria: SubCategoriaDto): ResponseEntity<SubCategoriaDto> {
         val categoria = obterCategoriaUseCase.run(id)
         val subCategoriaCreated = criarSubCategoriaUseCase.run(subCategoria.toSubCategoria(categoria = categoria))
-        return ResponseEntity.ok(subCategoriaCreated.toSubCategoriaDto())
+        return ResponseEntity(subCategoriaCreated.toSubCategoriaDto(), CREATED)
     }
 
 }
