@@ -12,7 +12,8 @@ data class CategoriaEntity(
     val nome: String? = "",
 
     @OneToMany(mappedBy = "categoria", cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
-    val subcategorias: List<SubCategoriaEntity> = emptyList()
+    val subcategorias: List<SubCategoriaEntity> = emptyList(),
+
 )
 
 fun CategoriaEntity.toCategoria() =

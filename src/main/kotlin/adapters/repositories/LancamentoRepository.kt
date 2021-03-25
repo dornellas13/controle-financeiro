@@ -1,19 +1,18 @@
 package adapters.repositories
 
-import adapters.entities.CategoriaEntity
 import adapters.entities.LancamentoEntity
-import adapters.entities.SubCategoriaEntity
-import org.springframework.data.domain.Example
-import org.springframework.data.domain.ExampleMatcher
+import adapters.entities.QLancamentoEntity
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository
 import usecases.repositories.ILancamentoRepository
+import java.time.LocalDate
 import java.util.*
 
 @Repository
 interface ILancamentoJpaRepository: JpaRepository<LancamentoEntity, Int>
 
-open class LancamentoRepository(private val lancamentoRepository: ILancamentoJpaRepository) : ILancamentoRepository {
+open class LancamentoRepository(private val lancamentoRepository: ILancamentoJpaRepository) : QuerydslRepositorySupport(LancamentoEntity::class.java), ILancamentoRepository {
     override fun save(lancamento: LancamentoEntity): LancamentoEntity {
         return this.lancamentoRepository.save(lancamento)
     }
@@ -27,26 +26,19 @@ open class LancamentoRepository(private val lancamentoRepository: ILancamentoJpa
     }
 
     override fun findAll(dataInicial: Date?, dataFinal: Date?, categoriaId: Int?): List<LancamentoEntity> {
-        val findByCategoriaId = LancamentoEntity(
-            id = null,
-            valor= null,
-            comentario = null,
-            data = null,
-            subcategoria = SubCategoriaEntity(
-                id = null,
-                nome = null,
-                categoria = CategoriaEntity(
-                    id = categoriaId,
-                    nome = null
-                )
-            )
-        )
-
-        val matcher = ExampleMatcher
-            .matching()
-            .withIgnoreNullValues()
-
-        return this.lancamentoRepository.findAll(Example.of(findByCategoriaId, matcher))
+        val lancamentoEntity = QLancamentoEntity.lancamentoEntity
+        var lancamentos = from(lancamentoEntity)
+        if(categoriaId != null)
+        {
+            lancamentos = lancamentos.where(lancamentoEntity.subcategoria.categoria.id.eq(categoriaId))
+        }
+        if(dataInicial != null) {
+            lancamentos = lancamentos.where(lancamentoEntity.data.gt(dataInicial))
+        }
+        if(dataFinal != null) {
+            lancamentos = lancamentos.where(lancamentoEntity.data.lt(dataFinal))
+        }
+        return lancamentos.fetch()
     }
 
 

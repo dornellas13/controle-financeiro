@@ -4,7 +4,7 @@ import domains.Balanco
 
 
 data class BalancoDto(
-    val categoria: CategoriaDto,
+    val categoria: CategoriaDto? = null,
     val saldo: Double,
     val receita: Double,
     val despesa: Double
@@ -12,7 +12,7 @@ data class BalancoDto(
 
 fun Balanco.toBalancoDto() =
     BalancoDto(
-        categoria = this.categoria!!.toCategoriaDto(),
+        categoria = if(this.categoria != null) this.categoria.toCategoriaDto() else null,
         saldo = this.saldo,
         receita = this.receita,
         despesa = this.despesa

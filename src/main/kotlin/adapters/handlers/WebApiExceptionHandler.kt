@@ -1,10 +1,10 @@
 package adapters.handlers
 
-import adapters.interceptors.AuthenticationInterceptor
+import adapters.exceptions.ApplicationException
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import org.springframework.dao.EmptyResultDataAccessException
-import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatus.*
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -23,13 +23,19 @@ class WebApiExceptionHandler : ResponseEntityExceptionHandler() {
     @ExceptionHandler(EntityNotFoundException::class)
     fun handleEntityNotFound(exception: EntityNotFoundException): ResponseEntity<WebApiError> {
         logger.error(exception.message)
-        return ResponseEntity(WebApiError(codigo = "erro_entidade_nao_encontrada", mensagem = "A entidade nao foi encontrada " ), HttpStatus.NOT_FOUND)
+        return ResponseEntity(WebApiError(codigo = "erro_entidade_nao_encontrada", mensagem = "A entidade nao foi encontrada " ), NOT_FOUND)
     }
 
     @ExceptionHandler(EmptyResultDataAccessException::class)
     fun handleEmptyResultDataAccessException(exception: EmptyResultDataAccessException):  ResponseEntity<WebApiError> {
         logger.error(exception.message)
-        return ResponseEntity(WebApiError(codigo = "erro_entidade_nao_encontrada", mensagem = "A entidade nao foi encontrada " ), HttpStatus.NO_CONTENT)
+        return ResponseEntity(WebApiError(codigo = "erro_entidade_nao_encontrada", mensagem = "A entidade nao foi encontrada " ), NO_CONTENT)
+    }
+
+    @ExceptionHandler(ApplicationException::class)
+    fun handleApplicationErrorException(exception: ApplicationException): ResponseEntity<WebApiError> {
+        logger.error(exception.message)
+        return ResponseEntity(WebApiError(codigo = "erro_regra_aplicacao", mensagem = exception.message!! ), CONFLICT)
     }
 
 }
