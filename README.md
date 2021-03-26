@@ -4,7 +4,12 @@ proof of concept about kotlin and spring boot
 ## Clean Architecture Concept
 [![Clean Architecture](assets/img/clean_architecture.png)](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 
+
 Packages Explanation
+- /src/test/kotlin/usecases
+    - Tests all use cases
+- /src/test/kotlin/controllers
+    - Tests all controllers
 - /src/main/kotlin/domains:
     - Entities encapsulate Enterprise wide business rules. An entity can be an object with methods, or it can be a set of data structures and functions. It doesn’t matter so long as the entities could be used by many different applications in the enterprise.
 
