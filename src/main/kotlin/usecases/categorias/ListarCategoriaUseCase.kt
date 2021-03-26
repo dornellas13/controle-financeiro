@@ -7,9 +7,11 @@ import usecases.repositories.ICategoriaRepository
 
 @Component
 class ListarCategoriaUseCase(private val categoriaRepository: ICategoriaRepository) {
-    fun run (): List<Categoria> {
-        return categoriaRepository.findAll().map {
-            it.toCategoria()
-        }.orEmpty()
+    fun run (nome: String?): List<Categoria> {
+        return if(nome.isNullOrEmpty()) {
+            categoriaRepository.findAll().map { it.toCategoria() }.orEmpty()
+        } else {
+            categoriaRepository.findAllByNome(nome).map { it.toCategoria() }.orEmpty()
+        }
     }
 }

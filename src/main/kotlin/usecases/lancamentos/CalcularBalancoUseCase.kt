@@ -11,8 +11,8 @@ import java.util.*
 @Component
 class CalcularBalancoUseCase(private val lancamentoRepository: ILancamentoRepository) {
     fun run (dataInicial: LocalDate? = null, dataFinal: LocalDate? = null, categoriaId: Int? = null): Balanco? {
-        var dataInicialDate = if(dataInicial != null) Date.from(dataInicial!!.atStartOfDay(ZoneId.systemDefault()).toInstant()) else null
-        var dataFinalDate = if(dataFinal != null) Date.from(dataFinal!!.atStartOfDay(ZoneId.systemDefault()).toInstant()) else null
+        val dataInicialDate = if(dataInicial != null) Date.from(dataInicial.atStartOfDay(ZoneId.systemDefault()).toInstant()) else null
+        val dataFinalDate = if(dataFinal != null) Date.from(dataFinal.atStartOfDay(ZoneId.systemDefault()).toInstant()) else null
 
         val lancamentos = lancamentoRepository.findAll(dataInicialDate, dataFinalDate, categoriaId)
         if (lancamentos.isEmpty()) return null else {

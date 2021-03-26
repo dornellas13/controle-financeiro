@@ -11,6 +11,7 @@ import usecases.lancamentos.AtualizarLancamentoUseCase
 import usecases.lancamentos.ExcluirLancamentoUseCase
 import usecases.lancamentos.ListarLancamentoUseCase
 import usecases.lancamentos.ObterLancamentoUseCase
+import java.time.LocalDate
 
 @RestController
 @RequestMapping("/api/lancamentos")
@@ -26,8 +27,10 @@ class LancamentoController(private val obterLancamentoUseCase: ObterLancamentoUs
     }
 
     @GetMapping()
-    fun listar(): ResponseEntity<List<LancamentoDto>> {
-        return ResponseEntity.ok(listarLancamentoUseCase.run().map {
+    fun listar(@RequestParam(required = false) dataInicial: String?, @RequestParam(required = false) dataFinal: String?): ResponseEntity<List<LancamentoDto>> {
+        return ResponseEntity.ok(listarLancamentoUseCase.run(
+            dataInicial = if(!dataInicial.isNullOrBlank()) LocalDate.parse(dataInicial) else null ,
+            dataFinal =  if(!dataFinal.isNullOrBlank()) LocalDate.parse(dataFinal) else null).map {
             it.toLancamentoDto()
         })
     }

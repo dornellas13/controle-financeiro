@@ -25,8 +25,8 @@ class SubCategoriaController(private val obterSubCategoriaUseCase: ObterSubCateg
     }
 
     @GetMapping()
-    fun listar(): ResponseEntity<List<SubCategoriaDto>> {
-        return ResponseEntity.ok(listarSubCategoriaUseCase.run().map {
+    fun listar(@RequestParam(required = false) nome: String?): ResponseEntity<List<SubCategoriaDto>> {
+        return ResponseEntity.ok(listarSubCategoriaUseCase.run(nome).map {
             it.toSubCategoriaDto()
         })
     }

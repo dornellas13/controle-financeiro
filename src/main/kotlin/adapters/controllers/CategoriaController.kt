@@ -23,8 +23,8 @@ class CategoriaController(private val obterCategoriaUseCase: ObterCategoriaUseCa
     }
 
     @GetMapping()
-    fun listar(): ResponseEntity<List<CategoriaDto>> {
-        return ResponseEntity.ok(listarCategoriaUseCase.run().map {
+    fun listar(@RequestParam(required = false) nome: String?): ResponseEntity<List<CategoriaDto>> {
+        return ResponseEntity.ok(listarCategoriaUseCase.run(nome).map {
             it.toCategoriaDto()
         })
     }

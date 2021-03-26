@@ -8,7 +8,7 @@ import java.util.*
 data class LancamentoDto(
     var id: Int = 0,
     val valor: Double,
-    val data: Date,
+    val data: Date = Date(),
     val comentario: String
 )
 
