@@ -5,7 +5,7 @@ import usecases.repositories.ICategoriaRepository
 
 @Component
 class ExcluirCategoriaUseCase(private val categoriaRepository: ICategoriaRepository) {
-    fun run (id: Int) {
+    fun run (id: Int): Boolean {
         return categoriaRepository.deleteById(id)
     }
 }

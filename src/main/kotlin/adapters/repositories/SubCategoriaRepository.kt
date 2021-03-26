@@ -31,8 +31,9 @@ open class SubCategoriaRepository(private val subCategoriaRepository: ISubCatego
         return from(subCategoriaEntity).where(subCategoriaEntity.nome.like(nome)).fetch()
     }
 
-    override fun deleteById(id: Int) {
-        return this.subCategoriaRepository.deleteById(id)
+    override fun deleteById(id: Int): Boolean {
+        this.subCategoriaRepository.deleteById(id)
+        return true
     }
 
 }

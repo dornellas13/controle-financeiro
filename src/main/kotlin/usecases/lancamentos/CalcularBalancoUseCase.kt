@@ -35,7 +35,7 @@ class CalcularBalancoUseCase(private val lancamentoRepository: ILancamentoReposi
             val saldo = (receita - (despesa * -1))
 
             return Balanco(
-                categoria = categoriaId.let { lancamentos.firstOrNull()?.subcategoria!!.categoria!!.toCategoria() },
+                categoria = if(categoriaId != null) lancamentos.firstOrNull()?.subcategoria!!.categoria!!.toCategoria() else null,
                 saldo = saldo,
                 receita = receita,
                 despesa = despesa

@@ -8,5 +8,5 @@ interface ICategoriaRepository {
     fun getByNome(nome: String): CategoriaEntity?
     fun findAll(): List<CategoriaEntity>
     fun findAllByNome(nome: String): List<CategoriaEntity>
-    fun deleteById(id: Int)
+    fun deleteById(id: Int): Boolean
 }

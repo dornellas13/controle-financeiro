@@ -10,7 +10,7 @@ import java.util.*
 
 @Component
 class ListarLancamentoUseCase(private val lancamentoRepository: ILancamentoRepository) {
-    fun run (dataInicial: LocalDate?, dataFinal: LocalDate?): List<Lancamento> {
+    fun run (dataInicial: LocalDate? = null, dataFinal: LocalDate? = null): List<Lancamento> {
         val dataInicialDate = if(dataInicial != null) Date.from(dataInicial.atStartOfDay(ZoneId.systemDefault()).toInstant()) else null
         val dataFinalDate = if(dataFinal != null) Date.from(dataFinal.atStartOfDay(ZoneId.systemDefault()).toInstant()) else null
         return lancamentoRepository.findAll(dataInicial = dataInicialDate, dataFinal = dataFinalDate, null).map {

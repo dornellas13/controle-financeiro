@@ -36,8 +36,9 @@ open class CategoriaRepository(private val categoriaRepository: ICategoriaJpaRep
         return from(categoriaEntity).where(categoriaEntity.nome.like(nome)).fetch()
     }
 
-    override fun deleteById(id: Int) {
-        return this.categoriaRepository.deleteById(id)
+    override fun deleteById(id: Int): Boolean {
+        this.categoriaRepository.deleteById(id)
+        return true
     }
 
     private fun beforeSave(categoriaEntity: CategoriaEntity) {

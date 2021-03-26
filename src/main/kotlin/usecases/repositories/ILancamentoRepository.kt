@@ -9,5 +9,5 @@ interface ILancamentoRepository {
     fun getById(id: Int): LancamentoEntity
     fun findAll(): List<LancamentoEntity>
     fun findAll(dataInicial: Date?, dataFinal: Date?, categoriaId: Int?): List<LancamentoEntity>
-    fun deleteById(id: Int)
+    fun deleteById(id: Int): Boolean
 }

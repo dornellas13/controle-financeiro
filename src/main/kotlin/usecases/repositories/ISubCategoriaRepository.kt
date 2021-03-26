@@ -7,5 +7,5 @@ interface ISubCategoriaRepository {
     fun getById(id: Int): SubCategoriaEntity
     fun findAll(): List<SubCategoriaEntity>
     fun findAllByNome(nome: String): List<SubCategoriaEntity>
-    fun deleteById(id: Int)
+    fun deleteById(id: Int): Boolean
 }

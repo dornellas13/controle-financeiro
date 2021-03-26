@@ -42,8 +42,9 @@ open class LancamentoRepository(private val lancamentoRepository: ILancamentoJpa
     }
 
 
-    override fun deleteById(id: Int) {
-        return this.lancamentoRepository.deleteById(id)
+    override fun deleteById(id: Int): Boolean {
+        this.lancamentoRepository.deleteById(id)
+        return true
     }
 
 }

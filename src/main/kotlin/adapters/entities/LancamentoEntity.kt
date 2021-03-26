@@ -30,7 +30,9 @@ fun LancamentoEntity.toLancamento() =
         id = this.id!!,
         valor = this.valor!!,
         data = this.data!!,
-        comentario = this.comentario!!
+        comentario = this.comentario!!,
+        subcategoria = if(this.subcategoria != null) this.subcategoria.toSubCategoria() else null
+
     )
 
 fun Lancamento.toLancamentoEntity() =

@@ -7,7 +7,7 @@ import usecases.repositories.ICategoriaRepository
 
 @Component
 class ListarCategoriaUseCase(private val categoriaRepository: ICategoriaRepository) {
-    fun run (nome: String?): List<Categoria> {
+    fun run (nome: String? = null): List<Categoria> {
         return if(nome.isNullOrEmpty()) {
             categoriaRepository.findAll().map { it.toCategoria() }.orEmpty()
         } else {

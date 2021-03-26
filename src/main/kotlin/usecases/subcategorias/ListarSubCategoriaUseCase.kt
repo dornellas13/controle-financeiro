@@ -7,7 +7,7 @@ import usecases.repositories.ISubCategoriaRepository
 
 @Component
 class ListarSubCategoriaUseCase(private val subCategoriaRepository: ISubCategoriaRepository) {
-    fun run (nome: String?): List<SubCategoria> {
+    fun run (nome: String? = null): List<SubCategoria> {
         return if(nome.isNullOrEmpty()) {
             subCategoriaRepository.findAll().map { it.toSubCategoria() }.orEmpty()
         } else {
