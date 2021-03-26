@@ -27,5 +27,5 @@ fun SubCategoriaDto.toSubCategoria() =
     SubCategoria(
         id = this.id,
         nome = this.nome,
-        categoria = Categoria()
+        categoria = if(this.categoria != null)  this.categoria!!.toCategoria() else Categoria()
     )

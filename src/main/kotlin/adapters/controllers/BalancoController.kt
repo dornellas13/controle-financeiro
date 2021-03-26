@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter
 @RequestMapping("/api/balanco")
 class BalancoController(private val calcularBalancoUseCase: CalcularBalancoUseCase) {
     @GetMapping()
-    fun obter(@RequestParam(required = false) categoriaId: Int?, @RequestParam(required = false) dataInicial: String?, @RequestParam(required = false) dataFinal: String?): ResponseEntity<BalancoDto> {
+    fun obter(@RequestParam(required = false) categoriaId: Int? = null, @RequestParam(required = false) dataInicial: String? = null, @RequestParam(required = false) dataFinal: String? = null): ResponseEntity<BalancoDto> {
         val balancoGeral = calcularBalancoUseCase.run(
             dataInicial = if(!dataInicial.isNullOrBlank()) LocalDate.parse(dataInicial) else null ,
             dataFinal =  if(!dataFinal.isNullOrBlank()) LocalDate.parse(dataFinal) else null,

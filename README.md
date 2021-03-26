@@ -37,6 +37,7 @@ From ⭐️ [Clean Code Blog](https://blog.cleancoder.com/uncle-bob/2012/08/13/t
 - Swagger
 - H2 Database
 - Actuator (HealthCheck)
+- JUnit5
 
 ## Requirements⚠️
 - JDK >= 8
@@ -53,6 +54,4 @@ From ⭐️ [Clean Code Blog](https://blog.cleancoder.com/uncle-bob/2012/08/13/t
 4. open cmd and copy -> curl http://localhost:8080/actuator/health
 5. open swagger http://localhost:8080/swagger-ui.html
 ```
-
-## Test
 

@@ -2,8 +2,8 @@ package usecases.subcategorias
 
 import adapters.entities.CategoriaEntity
 import adapters.entities.SubCategoriaEntity
-import junit.framework.Assert.assertFalse
-import junit.framework.Assert.assertTrue
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.runner.RunWith

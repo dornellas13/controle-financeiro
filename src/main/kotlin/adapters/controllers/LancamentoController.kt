@@ -27,7 +27,7 @@ class LancamentoController(private val obterLancamentoUseCase: ObterLancamentoUs
     }
 
     @GetMapping()
-    fun listar(@RequestParam(required = false) dataInicial: String?, @RequestParam(required = false) dataFinal: String?): ResponseEntity<List<LancamentoDto>> {
+    fun listar(@RequestParam(required = false) dataInicial: String? = null, @RequestParam(required = false) dataFinal: String? = null): ResponseEntity<List<LancamentoDto>> {
         return ResponseEntity.ok(listarLancamentoUseCase.run(
             dataInicial = if(!dataInicial.isNullOrBlank()) LocalDate.parse(dataInicial) else null ,
             dataFinal =  if(!dataFinal.isNullOrBlank()) LocalDate.parse(dataFinal) else null).map {
